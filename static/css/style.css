@@ -1,3 +1,11 @@
 #banner  {
 color: red;
+bgcolor: green;
+}
+#banner-content {
+	background-color: green;
+}
+body {
+	margin: 0;
+	font-family: sans-serif;
 }
