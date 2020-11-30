@@ -6,10 +6,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-	msg = buildDropDown()
+	conn = pg.connect(
+    host="localhost",
+    database="fw_telemetry")
+	msg = buildDropDown(conn)
 	return render_template('index.html',messo=msg)
-def buildDropDown():
-	return("<center><h4>What table's data would you like to examine?</h1></center>")
+def buildDropDown(c):
+	return("xoxoxo")
 if __name__=='__main__':
     app.run(debug=True)    
 
