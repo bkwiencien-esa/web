@@ -17,11 +17,15 @@
 <body>
    <div id="banner">
     <div id="banner-content">
-    <center><img src="static/images/swage1.jpeg" id ="img1" /></center>
+    <img src="static/images/swage1.jpeg" id ="img1" />
     </div>
   </div>
   <div class="jumbotron" id="jumbo">
-  	{% block body %} {% endblock %}
+    <div>
+      {% block content %} 
+      <center><h2>{{messo}}</h2></center>
+    {% endblock %}
+  </div>
   </div>
 </body>
 </html>
