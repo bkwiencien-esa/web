@@ -18,7 +18,7 @@ def buildDropDown(c):
 	c1 = c.cursor()
 	c1.execute("select tablename from pg_tables where tablename like 'fw_%' order by tablename")
 	tabrec = c1.fetchall()
-	command = '<center><form action="/dropo"> '
+	command = '<center><form action="/dropo" method="get"> '
 	command = command + '<label for="tabs">Choose a table:</label> '
 	command = command + '<select name="tabs" id="tabs"> '
 	for tabo in tabrec:
