@@ -15,16 +15,25 @@ def index():
 	def dropo():
 		return render_template('index.html',mess='done')
 def buildDropDown(c):
+	c1 = c.cursor()
+	c1.execute("select tablename from pg_tables where tablename like 'fw_%' order by tablename")
+	tabrec = c1.fetchall()
 	command = '<center><form action="/dropo"> '
 	command = command + '<label for="tabs">Choose a table:</label> '
 	command = command + '<select name="tabs" id="tabs"> '
-	command = command + '<option value="fw_asset">fw_asset</option> '
-	command = command + '<option value="fw_channel_state">fw_channel_state</option> '
+	for tabo in tabrec:
+		command = command + '<option value='+'"+tabo[0]"'+'>'+tabo[0]+'</option>'
 	command = command + '</select> '
 	command = command + '<br><br> '
 	command = command + '<input type="submit" value="Submit"> '
 	command = command + '</form></center>'
 	return(command)
+def getTables(c):
+	listo = []
+	return(listo)	
+def getColumns(c,l):
+	listo = []
+	return(listo)	
 if __name__=='__main__':
     app.run(debug=True)    
 
