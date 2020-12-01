@@ -22,7 +22,7 @@ def buildDropDown(c):
 	command = command + '<label for="tabs">Choose a table:</label> '
 	command = command + '<select name="tabs" id="tabs"> '
 	for tabo in tabrec:
-		command = command + '<option value='+'"+tabo[0]"'+'>'+tabo[0]+'</option>'
+		command = command + '<option value='+tabo[0]+'>'+tabo[0]+'</option>'
 	command = command + '</select> '
 	command = command + '<br><br> '
 	command = command + '<input type="submit" value="Submit"> '
