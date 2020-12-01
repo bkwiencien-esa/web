@@ -11,9 +11,9 @@ def index():
     host="localhost",
     database="fw_telemetry")
 	msg = buildDropDown(conn)
-	return render_template('index.html',messo="which table would you like to examine?",frm=msg)
+	return render_template('index.html',messo="",frm=msg)
 	def dropo():
-		return render_template('index.html',mess="done")
+		return render_template('index.html',mess='done')
 def buildDropDown(c):
 	command = '<center><form action="/dropo"> '
 	command = command + '<label for="tabs">Choose a table:</label> '
