@@ -13,7 +13,7 @@ def index():
 	msg = buildDropDown(conn)
 	return render_template('index.html',messo="",frm=msg)
 	def dropo():
-		return render_template('index.html',mess='done')
+		return render_template('index.html',messo='done')
 def buildDropDown(c):
 	c1 = c.cursor()
 	c1.execute("select tablename from pg_tables where tablename like 'fw_%' order by tablename")
