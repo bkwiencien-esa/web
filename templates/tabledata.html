@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+<center><b>Data for table:{%block tabnameo %}{{tablename}}{% endblock %}
+{% block content %}
+{{tdata |safe}}
+{% endblock %}

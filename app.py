@@ -5,7 +5,6 @@ conn = ""
 app = Flask(__name__)
 
 @app.route("/")
-@app.route("/dropo")
 def index():
 	conn = pg.connect(
     host="localhost",
@@ -13,9 +12,11 @@ def index():
     database="fw_telemetry")
 	msg = buildDropDown(conn)
 	view = buildViewView(conn)
-	return render_template('index.html',messo="",frm=msg,frmv=view)
-	def dropo():
-		return render_template('index.html',messo='done')
+	return render_template('index.html',messo="<center><h4>What table's data would you like to examine?</h1></center>",frm=msg,frmv=view)	
+@app.route("/dropo")	
+def dropo():
+		print("I amin dropo!!!s")
+		return render_template('tabledata.html',messo='done')
 def buildDropDown(c):
 	c1 = c.cursor()
 	c1.execute("select tablename from pg_tables where tablename like 'fw_%' order by tablename")
