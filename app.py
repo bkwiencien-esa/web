@@ -9,9 +9,11 @@ app = Flask(__name__)
 def index():
 	conn = pg.connect(
     host="localhost",
+    user="comm",
     database="fw_telemetry")
 	msg = buildDropDown(conn)
-	return render_template('index.html',messo="",frm=msg)
+	view = buildViewView(conn)
+	return render_template('index.html',messo="",frm=msg,frmv=view)
 	def dropo():
 		return render_template('index.html',messo='done')
 def buildDropDown(c):
@@ -28,6 +30,8 @@ def buildDropDown(c):
 	command = command + '<input type="submit" value="Submit"> '
 	command = command + '</form></center>'
 	return(command)
+def buildViewView(conn):
+	return("<center><b>not done yet<b></center>")	
 def getTables(c):
 	listo = []
 	return(listo)	
