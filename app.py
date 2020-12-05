@@ -1,22 +1,21 @@
 #! /Users/bobkwiencien/anaconda/bin/python
 from flask import Flask, render_template
+from flask import request
 import psycopg2 as pg
 conn = ""
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-	conn = pg.connect(
-    host="localhost",
-    user="comm",
-    database="fw_telemetry")
+	conn = getConnection()
 	msg = buildDropDown(conn)
 	view = buildViewView(conn)
 	return render_template('index.html',messo="<center><h4>What table's data would you like to examine?</h1></center>",frm=msg,frmv=view)	
 @app.route("/dropo")	
 def dropo():
-		print("I amin dropo!!!s")
-		return render_template('tabledata.html',messo='done')
+	conn = getConnection()
+	print(request.args.get('tabs'))
+	return render_template('tabledata.html',messo='done')
 def buildDropDown(c):
 	c1 = c.cursor()
 	c1.execute("select tablename from pg_tables where tablename like 'fw_%' order by tablename")
@@ -38,7 +37,13 @@ def getTables(c):
 	return(listo)	
 def getColumns(c,l):
 	listo = []
-	return(listo)	
+	return(listo)
+def getConnection():
+	conn = pg.connect(
+	host="localhost",
+	user="comm",
+	database="fw_telemetry")
+	return(conn)	
 if __name__=='__main__':
     app.run(debug=True)    
 
