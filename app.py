@@ -14,7 +14,9 @@ def index():
 @app.route("/dropo")	
 def dropo():
 	conn = getConnection()
-	print(request.args.get('tabs'))
+	tabname=request.args.get('tabs')
+	limit=request.args.get('limito')
+	results = getTableHTML(tabname)
 	return render_template('tabledata.html',messo='done')
 def buildDropDown(c):
 	c1 = c.cursor()
@@ -24,17 +26,23 @@ def buildDropDown(c):
 	command = command + '<label for="tabs">Choose a table:</label> '
 	command = command + '<select name="tabs" id="tabs"> '
 	for tabo in tabrec:
-		command = command + '<option value='+tabo[0]+'>'+tabo[0]+'</option>'
+		command = command + '<option value='+tabo[0]+'>'+tabo[0]+'</option>\n'
 	command = command + '</select> '
 	command = command + '<br><br> '
-	command = command + '<input type="submit" value="Submit"> '
+	command = command + '<label for="limito">Choose limit:</label>'
+	command = command + '<select name="limito" id="limit">'
+	command = command + '<option value="10">10</option>'
+	command = command + '<option value="100">100</option>'
+	command = command + '<option value="unlimited">unlimited</option>'
+	command = command + '</select>'
+	command = command + '<br><br> '
+	command = command + '<input type="submit" value="submit">'
 	command = command + '</form></center>'
 	return(command)
+def getTableHTML(tname):
+	return("xoxox")	
 def buildViewView(conn):
 	return("<center><b>not done yet<b></center>")	
-def getTables(c):
-	listo = []
-	return(listo)	
 def getColumns(c,l):
 	listo = []
 	return(listo)
