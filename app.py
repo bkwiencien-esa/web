@@ -16,8 +16,8 @@ def dropo():
 	conn = getConnection()
 	tabname=request.args.get('tabs')
 	limit=request.args.get('limito')
-	results = getTableHTML(tabname)
-	return render_template('tabledata.html',messo='done')
+	results = getTableHTML(conn,tabname)
+	return render_template('tabledata.html',tdata='done')
 def buildDropDown(c):
 	c1 = c.cursor()
 	c1.execute("select tablename from pg_tables where tablename like 'fw_%' order by tablename")
@@ -39,12 +39,16 @@ def buildDropDown(c):
 	command = command + '<input type="submit" value="submit">'
 	command = command + '</form></center>'
 	return(command)
-def getTableHTML(tname):
+def getTableHTML(c,tname):
+	ll = getColumns(c,tname)
 	return("xoxox")	
 def buildViewView(conn):
 	return("<center><b>not done yet<b></center>")	
 def getColumns(c,l):
-	listo = []
+	c1 = c.cursor()
+	c1.execute("select column_name from information_schema.columns where table_name='{}' order by ordinal_position".format(l))
+	colrec= c1.fetchall()
+	listo =[xx for xx in colrec]
 	return(listo)
 def getConnection():
 	conn = pg.connect(
