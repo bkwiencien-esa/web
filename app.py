@@ -41,6 +41,8 @@ def buildDropDown(c):
 	return(command)
 def getTableHTML(c,tname):
 	ll = getColumns(c,tname)
+	selectstmt=buildSelect(tname,ll)
+	tabhtml='<table'id="tab1">
 	return("xoxox")	
 def buildViewView(conn):
 	return("<center><b>not done yet<b></center>")	
@@ -50,6 +52,8 @@ def getColumns(c,l):
 	colrec= c1.fetchall()
 	listo =[xx for xx in colrec]
 	return(listo)
+def get buildSelect(t,l):
+	return('not done')	
 def getConnection():
 	conn = pg.connect(
 	host="localhost",
