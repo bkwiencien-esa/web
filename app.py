@@ -42,7 +42,7 @@ def buildDropDown(c):
 def getTableHTML(c,tname):
 	ll = getColumns(c,tname)
 	selectstmt=buildSelect(tname,ll)
-	tabhtml='<table'id="tab1">
+	tabhtml='<table id="tab1">'
 	return("xoxox")	
 def buildViewView(conn):
 	return("<center><b>not done yet<b></center>")	
@@ -51,8 +51,9 @@ def getColumns(c,l):
 	c1.execute("select column_name from information_schema.columns where table_name='{}' order by ordinal_position".format(l))
 	colrec= c1.fetchall()
 	listo =[xx for xx in colrec]
+	print(listo)
 	return(listo)
-def get buildSelect(t,l):
+def buildSelect(t,l):
 	return('not done')	
 def getConnection():
 	conn = pg.connect(
