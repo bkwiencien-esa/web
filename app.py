@@ -51,7 +51,8 @@ def getColumns(c,l):
 	c1.execute("select column_name from information_schema.columns where table_name='{}' order by ordinal_position".format(l))
 	colrec= c1.fetchall()
 	listo =[xx for xx in colrec]
-	print(listo)
+	for j in listo:
+		print(j[0])
 	return(listo)
 def buildSelect(t,l):
 	return('not done')	
