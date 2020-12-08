@@ -46,12 +46,10 @@ def getTableHTML(c,tname):
 	c1 = c.cursor()
 	c1.execute(selectstmt)
 	xoxo = c1.fetchall()
-	#pdb.set_trace()
 	tabhtml='<table id="tab1"> '
 	tabhtml=tabhtml+'<tr> '
 	for cn in ll:
-		tabhtml=tabhtml+'<th>'+cn[0]+'</th> '
-	#pdb.set_trace()	
+		tabhtml=tabhtml+'<th>'+cn[0]+'</th> '	
 	for x in xoxo:
 		tabhtml=tabhtml+"<tr> "
 		for j in x:
