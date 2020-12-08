@@ -22,9 +22,11 @@
   </div>
   <div class="jumbotron" id="jumbo">
     <div>   
-    {% block tabnameo %}
-    <center>    {{tablename|safe}} </center>
-    {% endblock %}  
+      <div id="dev0">
+       {% block tabnameo %}
+         <center>    {{tablename|safe}} </center>
+       {% endblock %}  
+      </div>
     {% block content %} 
         {{messo|safe}}
     {% endblock %}

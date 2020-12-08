@@ -42,6 +42,8 @@ def buildDropDown(c):
 def getTableHTML(c,tname):
 	ll = getColumns(c,tname)
 	selectstmt=buildSelect(tname,ll)
+	c1 = c.cursor()
+	roro = c1.execute(selectstmt)
 	tabhtml='<table id="tab1"> '
 	tabhtml=tabhtml+'<tr> '
 	for cn in ll:
