@@ -22,8 +22,8 @@ bgcolor: #b3e0ff;
 	color: white;
 }
 table{
-	border: 1px solid black;
-	border-spacing: 2px;
+	border: 2px solid black;
+	border-spacing: 4px;
 	width:  50%;
 	color:  white;
 	padding: 10px;

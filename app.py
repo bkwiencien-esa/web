@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 from flask import request
 import psycopg2 as pg
+import pdb
 conn = ""
 app = Flask(__name__)
 
@@ -43,11 +44,19 @@ def getTableHTML(c,tname):
 	ll = getColumns(c,tname)
 	selectstmt=buildSelect(tname,ll)
 	c1 = c.cursor()
-	roro = c1.execute(selectstmt)
+	c1.execute(selectstmt)
+	xoxo = c1.fetchall()
+	#pdb.set_trace()
 	tabhtml='<table id="tab1"> '
 	tabhtml=tabhtml+'<tr> '
 	for cn in ll:
 		tabhtml=tabhtml+'<th>'+cn[0]+'</th> '
+	#pdb.set_trace()	
+	for x in xoxo:
+		tabhtml=tabhtml+"<tr> "
+		for j in x:
+			tabhtml=tabhtml + "<td> " + str(j) + "</td> "	
+		tabhtml=tabhtml+" </tr> "   	
 	tabhtml=tabhtml+'</tr></table>' 	
 	return(tabhtml)	
 def buildViewView(conn):
