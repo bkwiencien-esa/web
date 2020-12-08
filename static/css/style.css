@@ -21,7 +21,7 @@ bgcolor: #b3e0ff;
 #toto {
 	color: white;
 }
-table{
+table,th,td {
 	border: 2px solid black;
 	border-spacing: 4px;
 	width:  50%;
