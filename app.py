@@ -10,18 +10,18 @@ app = Flask(__name__)
 def index():
 	conn = getConnection()
 	msg = buildDropDown(conn)
-	view = buildViewView(conn)
-	return render_template('index.html',messo="<center><h4>What table's data would you like to examine?</h1></center>",frm=msg,frmv=view)	
+	return render_template('index.html',messo="<center><h4>What table's/view's data would you like to examine?</h1></center>",frm=msg)	
 @app.route("/dropo")	
 def dropo():
 	conn = getConnection()  
 	tabname=request.args.get('tabs')
 	limit=request.args.get('limito')
-	results = getTableHTML(conn,tabname)
+	results = getTableHTML(conn,tabname,limit)
 	return render_template('tabledata.html',tablename=tabname,tdata=results)
 def buildDropDown(c):
 	c1 = c.cursor()
-	c1.execute("select tablename from pg_tables where tablename like 'fw_%' order by tablename")
+	c1.execute("select tablename from pg_tables where tablename like 'fw_%' "
+		+ "	union select viewname as tablename from pg_views where viewname  like 'fw%'order by tablename")
 	tabrec = c1.fetchall()
 	command = '<center><form action="/dropo" method="get"> '
 	command = command + '<label for="tabs">Choose a table:</label> '
@@ -40,9 +40,9 @@ def buildDropDown(c):
 	command = command + '<input type="submit" value="submit">'
 	command = command + '</form></center>'
 	return(command)
-def getTableHTML(c,tname):
+def getTableHTML(c,tname,limito):
 	ll = getColumns(c,tname)
-	selectstmt=buildSelect(tname,ll)
+	selectstmt=buildSelect(tname,ll,limito)
 	c1 = c.cursor()
 	c1.execute(selectstmt)
 	xoxo = c1.fetchall()
@@ -57,20 +57,20 @@ def getTableHTML(c,tname):
 		tabhtml=tabhtml+" </tr> "   	
 	tabhtml=tabhtml+'</tr></table>' 	
 	return(tabhtml)	
-def buildViewView(conn):
-	return("<center><b>not done yet<b></center>")	
 def getColumns(c,l):
 	c1 = c.cursor()
 	c1.execute("select column_name from information_schema.columns where table_name='{}' order by ordinal_position".format(l))
 	colrec= c1.fetchall()
 	listo =[xx for xx in colrec]
 	return(listo)
-def buildSelect(t,l):
+def buildSelect(t,l,lim):
+	limdic = {"10": "limit 10","100":"limit 100","unlimited": ""}
+	llx = limdic[lim]
 	selectlist=""
 	for c in l:
-		selectlist = selectlist + c[0]+", "
+		selectlist = selectlist +"\"" + c[0]+ "\"" +", "
 	selectlist = selectlist[:-2]	
-	query = "select " + selectlist + " from " + t
+	query = "select " + selectlist + " from " + t + " " + llx
 	print(query)
 	return(query)	
 def getConnection():
